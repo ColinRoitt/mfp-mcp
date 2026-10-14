@@ -1,0 +1,30 @@
+{
+ "items": [
+  {
+   "id": "m3",
+   "type": "Weight",
+   "value": 180,
+   "date": "2026-01-03",
+   "unit": "pounds",
+   "updated_at": "2026-01-03T09:11:03Z"
+  },
+  {
+   "id": "m2",
+   "type": "Weight",
+   "value": 181.4,
+   "date": "2026-01-02",
+   "unit": "pounds",
+   "updated_at": "2026-01-02T08:16:23Z"
+  },
+  {
+   "id": "m1",
+   "type": "Waist",
+   "value": 32,
+   "date": "2026-01-01",
+   "unit": "inches",
+   "updated_at": "2026-01-01T08:00:00Z"
+  }
+ ],
+ "has_more": false,
+ "total_entries": 3
+}

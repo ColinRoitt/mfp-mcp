@@ -1,0 +1,104 @@
+{
+ "valid_from": "2026-01-01",
+ "valid_to": "2100-01-01",
+ "daily_goals": [
+  {
+   "day_of_week": "monday",
+   "group_id": 0,
+   "energy": {
+    "value": 2000,
+    "unit": "calories"
+   },
+   "carbohydrates": 220,
+   "protein": 120,
+   "fat": 65,
+   "fiber": 30,
+   "sodium": 2300,
+   "sugar": 90
+  },
+  {
+   "day_of_week": "tuesday",
+   "group_id": 0,
+   "energy": {
+    "value": 2000,
+    "unit": "calories"
+   },
+   "carbohydrates": 220,
+   "protein": 120,
+   "fat": 65,
+   "fiber": 30,
+   "sodium": 2300,
+   "sugar": 90
+  },
+  {
+   "day_of_week": "wednesday",
+   "group_id": 0,
+   "energy": {
+    "value": 2000,
+    "unit": "calories"
+   },
+   "carbohydrates": 220,
+   "protein": 120,
+   "fat": 65,
+   "fiber": 30,
+   "sodium": 2300,
+   "sugar": 90
+  },
+  {
+   "day_of_week": "thursday",
+   "group_id": 0,
+   "energy": {
+    "value": 2000,
+    "unit": "calories"
+   },
+   "carbohydrates": 220,
+   "protein": 120,
+   "fat": 65,
+   "fiber": 30,
+   "sodium": 2300,
+   "sugar": 90
+  },
+  {
+   "day_of_week": "friday",
+   "group_id": 0,
+   "energy": {
+    "value": 2000,
+    "unit": "calories"
+   },
+   "carbohydrates": 220,
+   "protein": 120,
+   "fat": 65,
+   "fiber": 30,
+   "sodium": 2300,
+   "sugar": 90
+  },
+  {
+   "day_of_week": "saturday",
+   "group_id": 0,
+   "energy": {
+    "value": 2300,
+    "unit": "calories"
+   },
+   "carbohydrates": 220,
+   "protein": 120,
+   "fat": 65,
+   "fiber": 30,
+   "sodium": 2300,
+   "sugar": 90
+  },
+  {
+   "day_of_week": "sunday",
+   "group_id": 0,
+   "energy": {
+    "value": 2000,
+    "unit": "calories"
+   },
+   "carbohydrates": 220,
+   "protein": 120,
+   "fat": 65,
+   "fiber": 30,
+   "sodium": 2300,
+   "sugar": 90
+  }
+ ]
+}

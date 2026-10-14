@@ -1,0 +1,11 @@
+.env
+spike-out/
+*.db
+*.db-*
+.venv/
+__pycache__/
+data/
+*.egg-info/
+.pytest_cache/
+*.log
+secrets/

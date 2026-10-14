@@ -1,0 +1,79 @@
+# MFP → Claude connector.
+#   mcp:  read-only MCP server, reached by Nginx Proxy Manager over the external `proxy` network
+#   sync: nightly sync from MyFitnessPal (needs outbound internet only)
+# Secrets live in ./secrets (git-ignored); data in ./data. See README.md.
+name: mfp
+
+x-env: &env
+  MFP_USER: ${MFP_USER:?set MFP_USER in .env}
+  MFP_TZ: ${MFP_TZ:-UTC}
+  MFP_COUNTRY: ${MFP_COUNTRY:-US}
+  MFP_DB: /data/mfp.db
+  MFP_COOKIE_FILE: /run/secrets/mfp_cookie
+  MFP_UA_FILE: /run/secrets/mfp_ua
+  MFP_ALERT_URL_FILE: /run/secrets/mfp_alert_url   # empty file = alerts off
+  MFP_PUBLIC_HOST: ${MFP_PUBLIC_HOST:?set MFP_PUBLIC_HOST in .env}
+
+services:
+  mcp:
+    build: .
+    image: mfp-connector:latest
+    container_name: mfp-mcp
+    command: ["serve", "--port", "8000"]
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    environment:
+      <<: *env
+      MFP_MCP_TOKEN_FILE: /run/secrets/mfp_mcp_token
+      MFP_ADMIN_TOKEN_FILE: /run/secrets/mfp_admin_token
+      MFP_ALLOWED_HOSTS: ${MFP_PUBLIC_HOST:?set MFP_PUBLIC_HOST in .env}
+    secrets: [mfp_cookie, mfp_ua, mfp_alert_url, mfp_mcp_token, mfp_admin_token]
+    volumes:
+      - ./data:/data
+    networks: [proxy, default]
+    # No published ports: NPM forwards to http://mfp-mcp:8000 on the proxy network.
+    expose: ["8000"]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  sync:
+    build: .
+    image: mfp-connector:latest
+    container_name: mfp-sync
+    command: ["scheduler", "--at", "${MFP_NIGHTLY_AT:-03:30}"]
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    environment:
+      <<: *env
+    secrets: [mfp_cookie, mfp_ua, mfp_alert_url]
+    volumes:
+      - ./data:/data
+    networks: [default]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+
+secrets:
+  mfp_cookie:
+    file: ./secrets/mfp_cookie
+  mfp_ua:
+    file: ./secrets/mfp_ua
+  mfp_alert_url:
+    file: ./secrets/mfp_alert_url
+  mfp_mcp_token:
+    file: ./secrets/mfp_mcp_token
+  mfp_admin_token:
+    file: ./secrets/mfp_admin_token
+
+networks:
+  proxy:
+    external: true
