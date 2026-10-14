@@ -1,6 +1,6 @@
 # MFP → Claude connector
 
-A bridge from MyFitnessPal to claude.ai. A sync job copies your food diary, weight readings and daily goals into SQLite. An MCP server (streamable HTTP) exposes them as tools that a claude.ai custom connector can call. It can also search MFP's food database and add or remove diary entries, but only through a draft that you see and approve (see [Changing the diary](#changing-the-diary)).
+A vibecoded bridge from MyFitnessPal to claude.ai. A sync job copies your food diary, weight readings and daily goals into SQLite. An MCP server (streamable HTTP) exposes them as tools that a claude.ai custom connector can call. It can also search MFP's food database and add or remove diary entries, but only through a draft that you see and approve (see [Changing the diary](#changing-the-diary)).
 
 ```
 MFP web API ◀── mfp-sync (nightly 03:30) ───┐
